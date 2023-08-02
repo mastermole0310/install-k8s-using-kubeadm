@@ -32,17 +32,11 @@ systemctl restart containerd
 
 swapoff -a  <<<<<<<< just disable it in /etc/fstab instead
 
-apt-get update
-apt-get install -y apt-transport-https ca-certificates curl
-
-curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-
-apt-get update
-
-reboot
-
-sudo -s
+apt update
+apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt update
 
 apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00
 apt-mark hold kubelet kubeadm kubectl
