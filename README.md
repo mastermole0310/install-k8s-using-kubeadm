@@ -33,6 +33,7 @@ systemctl restart containerd
 swapoff -a  <<<<<<<< just disable it in /etc/fstab instead
 
 apt update 
+apt install -y curl gnupg2 software-properties-common apt-transport-https ca-certificates
 
 apt-get install -y kubelet=1.26.1-00 kubeadm=1.26.1-00 kubectl=1.26.1-00
 apt-mark hold kubelet kubeadm kubectl
